@@ -1,0 +1,30 @@
+<template name="home">
+    {{#if showEditEvent}}
+    {{>editEvent}}
+    {{/if}}
+    <input type="hidden" id="lastMod" name="lastMod" value="{{lastMod}}" />
+    <div id="calendar"></div>
+</template>
+
+<template name="editEvent">
+<div class="modal fade in show" id="modal-id">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Title: <b>{{evt.title}}</b></h4>
+			</div>
+			<div class="modal-body">
+                <label for="title">Title</label><input type="text" id="title" name="title" value="{{evt.title}}" />
+                <label for="desc">Desc</label><input type="text" id="desc" name="desc" value="{{evt.desc}}" />
+                <label for="desc">Start</label><input type="text" id="start" name="start" value="{{evt.start}}" />
+                <label for="desc">End</label><input type="text" id="end" name="end" value="{{evt.end}}" />
+			</div>
+			<div class="modal-footer">
+			    <button type="button" class="btn btn-default pull-left" id="deleteEvent">Delete</button>
+			    <button type="button" class="btn btn-default" id="closeEdit">Close</button>
+			    <button type="button" class="btn btn-success" id="updateEvent">Save</button>
+			</div>
+		</div>
+	</div>
+</div>
+</template>
