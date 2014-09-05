@@ -1,4 +1,4 @@
 meteor-calendar
 ===============
 
-Meteor Calendar
+Meteor Calendar (meteor version 0.9.1)
