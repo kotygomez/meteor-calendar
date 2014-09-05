@@ -1,0 +1,4 @@
+meteor-calendar
+===============
+
+Meteor Calendar
