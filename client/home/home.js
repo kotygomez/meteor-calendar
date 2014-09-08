@@ -26,6 +26,7 @@ Template.home.rendered = function() {
         },
     
         eventClick:function(calEvent,jsEvent,view) {
+                    
             Session.set('editingCalEvent', calEvent.id);
             Session.set('showEditEvent', true);
         },
@@ -34,7 +35,18 @@ Template.home.rendered = function() {
             CalEvents.update(calEvent.id, {$set: {start:calEvent.start,end:calEvent.end}});
             Session.set('lastMod',new Date());
         },
-    
+        
+        eventResize: function(calEvent, dayDelta, minDelta, revertFunc) {
+
+            CalEvents.update(calEvent.id, {$set: {start:calEvent.start,end:calEvent.end}});
+            Session.set('lastMod',new Date());
+        },
+        
+        eventAfterRender: function(event, element, view) {
+            $(element).css('background-color', '#216d9a');
+            $(element).css('padding-left', '5px');
+        },
+            
         events: function(start, end, callback) {
             var events = [];
             calEvents = CalEvents.find();
@@ -48,10 +60,11 @@ Template.home.rendered = function() {
             });
             callback(events);
         },
+        /*eventBackgroundColor: 'red', */
         editable:true,
         selectable: true,
         allDayDefault: false,
-        defaultView: 'agendaWeek'
+        defaultView: 'agendaWeek',
         
     }).data().fullCalendar;
     
