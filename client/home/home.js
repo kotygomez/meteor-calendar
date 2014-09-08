@@ -1,10 +1,13 @@
 
-
+// Session variables
 Session.setDefault('editingCalEvent', null);
 Session.setDefault('showEditEvent', false);
 Session.setDefault('lastMod', null);
 
+// Home - calendar view
 Template.home.rendered = function() {
+
+    // Create a new full calendar
     calendar = $('#calendar').fullCalendar({
         
         header: {
@@ -49,6 +52,7 @@ Template.home.rendered = function() {
         selectable: true,
         allDayDefault: false,
         defaultView: 'agendaWeek'
+        
     }).data().fullCalendar;
     
     Deps.autorun(function(){
@@ -62,6 +66,7 @@ Template.home.showEditEvent = function() {
     return Session.get('showEditEvent');
 }
 
+// Edit event 
 Template.editEvent.evt = function() {
     return CalEvents.findOne({_id: Session.get('editingCalEvent')});
 }
