@@ -12,3 +12,7 @@ Requires
 - JQuery
 - JQuery UI
 - Moment.js
+
+Notes
+===============
+Server.js has (commented) code to add dummy events on startup
