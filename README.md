@@ -11,7 +11,7 @@ To install meteor on your system follow the instructions at: http://docs.meteor.
 Requires
 ===============
 
-Install the following using "meteor add <package name>"
+Install the following using "meteor add \<package-name\>"
 
 - Iron-router
 - Bootstrap
