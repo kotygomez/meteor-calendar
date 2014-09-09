@@ -8,6 +8,15 @@ Getting Started
 
 To install meteor on your system follow the instructions at: http://docs.meteor.com/
 
+#### Stopping Meteor server
+
+From the command line just do a **"ctrl + c"**
+
+#### Meteor Mongo DB (mini Mongo)
+
+To view the data in Meteors MongoDB from the command line do **"meteor mongo"**
+
+
 Requires
 ===============
 
