@@ -6,7 +6,9 @@ Meteor Calendar (meteor version 0.9.1)
 Getting Started
 ===============
 
-To install meteor on your system follow the instructions at: http://docs.meteor.com/
+To install meteor on your system follow these instructions:
+OS X/Linux - http://docs.meteor.com/
+Windows - http://win.meteor.com/
 
 #### Stopping Meteor server
 
