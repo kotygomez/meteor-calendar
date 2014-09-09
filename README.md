@@ -7,6 +7,7 @@ Getting Started
 ===============
 
 To install meteor on your system follow these instructions:
+
 OS X/Linux - http://docs.meteor.com/
 Windows - http://win.meteor.com/
 
