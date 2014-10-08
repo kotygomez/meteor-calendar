@@ -27,7 +27,7 @@ Install the following using "meteor add \<package-name\>"
 
 - Iron-router
 - Bootstrap
-- Full Calendar (should include jQuery UI)
+- Full Calendar version v1.6.1 (should include jQuery UI)
 - JQuery
 - JQuery UI
 - Moment.js
