@@ -23,14 +23,14 @@ To view the data in Meteors MongoDB from the command line do **"meteor mongo"**
 Requires
 ===============
 
-Install the following using "meteor add \<package-name\>"
+Install the following using "meteor add \<package-name\>" or using meteorite "mrt add \<package-name\>"
 
 - Iron-router
 - Bootstrap
-- Full Calendar version v1.6.1 (should include jQuery UI)
+- Full Calendar version 2.0.2 (should include jQuery UI)
 - JQuery
 - JQuery UI
-- Moment.js
+- Moment.js version 2.8.1
 
 Notes
 ===============
