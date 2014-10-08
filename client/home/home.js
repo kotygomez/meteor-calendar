@@ -4,11 +4,9 @@ Session.setDefault('editingCalEvent', null);
 Session.setDefault('showEditEvent', false);
 Session.setDefault('lastMod', null);
 
-// Home - calendar view
-Template.home.rendered = function() {
-
+function setupCalendar() {
     // Create a new full calendar
-    calendar = $('#calendar').fullCalendar({
+    return calendar = $('#calendar').fullCalendar({
         
         header: {
 			left: 'prev,next today',
@@ -16,29 +14,40 @@ Template.home.rendered = function() {
 			right: 'month,agendaWeek,agendaDay'
 		},
         
-        dayClick:function(date, allDay, jsEvent, view) {
-
-            var endDateTime = moment(new Date(date)).add(1, 'h').toISOString();
+        dayClick:function(date, jsEvent, view) {
+                        
+            var startDateTime = date.local().toISOString();
+            var endDateTime = moment(date.toISOString()).add(1, 'h').toISOString();
+            
+            startDateTime = new Date(startDateTime);
             endDateTime = new Date(endDateTime);
         
-            CalEvents.insert({title: 'New Event', start: date, end: endDateTime });
+            CalEvents.insert({title: 'New Event', start: startDateTime, end: endDateTime });
+            
             Session.set('lastMod',new Date());
+
         },
     
         eventClick:function(calEvent,jsEvent,view) {
-                    
             Session.set('editingCalEvent', calEvent.id);
             Session.set('showEditEvent', true);
         },
     
         eventDrop:function(calEvent) {
-            CalEvents.update(calEvent.id, {$set: {start:calEvent.start,end:calEvent.end}});
+            
+            var startDateTime = calEvent.start.toISOString();
+            var endDateTime = calEvent.end.toISOString();
+        
+            CalEvents.update(calEvent.id, {$set: {start:startDateTime,end:endDateTime}});
             Session.set('lastMod',new Date());
         },
         
         eventResize: function(calEvent, dayDelta, minDelta, revertFunc) {
 
-            CalEvents.update(calEvent.id, {$set: {start:calEvent.start,end:calEvent.end}});
+            var startDateTime = calEvent.start.toISOString();
+            var endDateTime = calEvent.end.toISOString();
+
+            CalEvents.update(calEvent.id, {$set: {start:startDateTime,end:endDateTime}});
             Session.set('lastMod',new Date());
         },
         
@@ -46,9 +55,14 @@ Template.home.rendered = function() {
             $(element).css('background-color', '#216d9a');
             $(element).css('padding-left', '5px');
         },
+        
+        loading: function(isLoading, view) {
+            //console.log(isLoading);  
+        },
             
-        events: function(start, end, callback) {
+        events: function(start, end, timezone, callback) {
             var events = [];
+        
             calEvents = CalEvents.find();
             calEvents.forEach(function(evt) {
                 events.push({
@@ -60,14 +74,21 @@ Template.home.rendered = function() {
             });
             callback(events);
         },
-        /*eventBackgroundColor: 'red', */
+
         editable:true,
         selectable: true,
         allDayDefault: false,
         defaultView: 'agendaWeek',
         
     }).data().fullCalendar;
-    
+
+}
+
+// Home - calendar view
+Template.home.rendered = function() { 
+
+    var calendar = setupCalendar();   
+
     Deps.autorun(function(){
         allReqsCursor = CalEvents.find().fetch();
         if(calendar)
